@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.com/the-toster/psalm-fmt.svg?branch=master)](https://travis-ci.com/the-toster/http-message-logger)
+![Psalm coverage](https://shepherd.dev/github/the-toster/http-message-logger/coverage.svg)
+
 # Logger for HTTP messages 
 ```shell
 compose require the-toster/http-message-logger 
