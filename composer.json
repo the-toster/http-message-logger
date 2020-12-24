@@ -1,0 +1,27 @@
+{
+    "name": "the-toster/http-message-logger",
+    "description": "Log PSR MessageInterface instances to LoggerInterface",
+    "type": "library",
+    "require": {
+        "php": "^7.4|^8.0",
+        "psr/log": "^1.1",
+        "psr/http-message": "^1.0",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "vimeo/psalm": "^4.3",
+        "phpunit/phpunit": "^9.5",
+        "guzzlehttp/psr7": "^1.7"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "HttpMessageLogger\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    }
+}
