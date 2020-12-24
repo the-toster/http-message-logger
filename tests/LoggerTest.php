@@ -11,6 +11,9 @@ use HttpMessageLogger\Logger;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\Test\TestLogger;
 
+/**
+ * @covers \HttpMessageLogger\Logger
+ */
 final class LoggerTest extends TestCase
 {
     public function testResponseLogging(): void

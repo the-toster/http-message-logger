@@ -23,7 +23,7 @@ final class FormatterTest extends TestCase
 
         //$marker = substr(md5(json_encode(['POST', '/some/uri', 'test body', ['X-Test'=>['123']]])), 0, 4);
         $this->assertEquals('prefix request [2d5d]', $record->message);
-        $this->assertEquals(['method' => 'POST', 'url' => '/some/uri', 'headers' => ['X-Test'=>['123']], 'body' => 'test body'], $record->context);
+        $this->assertEquals(['method' => 'POST', 'url' => '/some/uri', 'headers' => ['X-Test'=>['123']], 'body' => 'test body', 'marker'=>'2d5d'], $record->context);
     }
 
     public function testResponseFormatting(): void
@@ -35,7 +35,7 @@ final class FormatterTest extends TestCase
 
         //$marker = substr(md5(json_encode(['POST', '/some/uri', 'test body', ['X-Test'=>['123']]])), 0, 4);
         $this->assertEquals('prefix response [2d5d]', $record->message);
-        $this->assertEquals(['status'=>200, 'headers' => ['X-Test'=>['321']], 'body' => 'test response'], $record->context);
+        $this->assertEquals(['status'=>200, 'headers' => ['X-Test'=>['321']], 'body' => 'test response', 'marker'=>'2d5d'], $record->context);
     }
 
     public function testResponseFormattingWithoutRequest(): void
@@ -45,7 +45,7 @@ final class FormatterTest extends TestCase
         $record = $formatter->formatResponse($response, null);
 
         $this->assertEquals('prefix response []', $record->message);
-        $this->assertEquals(['status'=>200, 'headers' => ['X-Test'=>['321']], 'body' => 'test response'], $record->context);
+        $this->assertEquals(['status'=>200, 'headers' => ['X-Test'=>['321']], 'body' => 'test response', 'marker'=>''], $record->context);
     }
 
 }

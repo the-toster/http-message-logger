@@ -26,7 +26,7 @@ final class Logger
         $this->logger->log($level, $record->message, $record->context);
     }
 
-    public function logResponse(ResponseInterface $response, ?RequestInterface $request, string $level = 'debug'): void
+    public function logResponse(ResponseInterface $response, ?RequestInterface $request = null, string $level = 'debug'): void
     {
         $record = $this->formatter->formatResponse($response, $request, $level);
         $this->logger->log($level, $record->message, $record->context);
