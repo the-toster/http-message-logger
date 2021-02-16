@@ -3,7 +3,7 @@
 
 # Logger for HTTP messages 
 ```shell
-compose require the-toster/http-message-logger 
+composer require the-toster/http-message-logger 
 ```
 
 Small logger to debug your API's. You can use it like this:
