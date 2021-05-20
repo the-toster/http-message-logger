@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace HttpMessageLogger\Formatter;
@@ -8,7 +9,7 @@ use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-final class DefaultFormatter implements FormatterInterface
+final class DebugFormatter implements FormatterInterface
 {
     private string $prefix;
 
@@ -24,7 +25,7 @@ final class DefaultFormatter implements FormatterInterface
         $content = $this->getBody($request);
         $url = (string) $request->getUri();
         return new Record($this->prefix." request [$marker]",
-            ['method' => $request->getMethod(), 'url' => $url, 'body' => $content, 'marker'=>$marker]);
+                          ['method' => $request->getMethod(), 'url' => $url, 'headers' => $headers, 'body' => $content, 'marker'=>$marker]);
     }
 
     public function formatResponse(
@@ -35,7 +36,7 @@ final class DefaultFormatter implements FormatterInterface
         $marker = $request ? $this->calcMarker($request) : "";
         $headers = $response->getHeaders();
         $content = $this->getBody($response);
-        return new Record($this->prefix." response [$marker]", ['status'=>$response->getStatusCode(), 'body' => $content, 'marker'=>$marker]);
+        return new Record($this->prefix." response [$marker]", ['status'=>$response->getStatusCode(), 'headers' => $headers, 'body' => $content, 'marker'=>$marker]);
     }
 
     private function calcMarker(RequestInterface $request): string
