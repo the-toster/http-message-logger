@@ -6,14 +6,12 @@
 composer require the-toster/http-message-logger 
 ```
 
-Small logger to debug your API's. You can use it like this:
+Small logger to debug your API's.  
+You can use it like this:  
 ````injectablephp
-use HttpMessageLogger\Logger;
-use HttpMessageLogger\Formatter\DefaultFormatter;
-// ...
-
+use HttpMessageLogger\LoggerFactory;
 /** @var \Psr\Log\LoggerInterface $psrLogger */
-$logger = new Logger($psrLogger, new DefaultFormatter('Prefix for log message'));
+$logger = LoggerFactory::default($psrLogger, 'Prefix for log message');
 
 /** @var \Psr\Http\Message\RequestInterface $request */
 $logger->logRequest($request); 
@@ -22,9 +20,22 @@ $logger->logRequest($request);
 
 /** @var \Psr\Http\Message\ResponseInterface $response */
 $logger->logResponse($response, $request); 
-````
 
-It will dump full `$request` & `$response` to your `$psrLogger`, tagged with corresponding request hash.  
+````
+It will dump full `$request` & `$response` to your `$psrLogger`, tagged with corresponding request hash.   
+
+
+Also, you can instantiate it with your own formatter and, optionally, default log level:  
+
+````injectablephp
+use HttpMessageLogger\Logger;
+use HttpMessageLogger\Formatter\DefaultFormatter;
+// ...
+
+/** @var \Psr\Log\LoggerInterface $psrLogger */
+$logger = new Logger($psrLogger, new DefaultFormatter('Prefix for log message'), $logLevel);
+
+````
 
 You can also omit `request` when logging response, and you can pass log level:
 ```injectablephp
@@ -32,4 +43,4 @@ $logger->logResponse($response);
 $logger->logResponse($response, $request, 'info');
 ```
 
-To customize logging format, just implements your own FormatterInterface.
+To customize logging format, just implements your own `HttpMessageLogger\Formatter\FormatterInterface` 🙂
