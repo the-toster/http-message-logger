@@ -20,7 +20,6 @@ final class DefaultFormatter implements FormatterInterface
     public function formatRequest(RequestInterface $request, string $level = 'debug'): Record
     {
         $marker = $this->calcMarker($request);
-        $headers = $request->getHeaders();
         $content = $this->getBody($request);
         $url = (string) $request->getUri();
         return new Record($this->prefix." request [$marker]",
@@ -33,7 +32,6 @@ final class DefaultFormatter implements FormatterInterface
         string $level = 'debug'
     ): Record {
         $marker = $request ? $this->calcMarker($request) : "";
-        $headers = $response->getHeaders();
         $content = $this->getBody($response);
         return new Record($this->prefix." response [$marker]", ['status'=>$response->getStatusCode(), 'body' => $content, 'marker'=>$marker]);
     }

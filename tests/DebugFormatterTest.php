@@ -6,18 +6,18 @@ namespace Tests;
 
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use HttpMessageLogger\Formatter\DefaultFormatter;
+use HttpMessageLogger\Formatter\DebugFormatter;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \HttpMessageLogger\Formatter\DefaultFormatter
+ * @covers \HttpMessageLogger\Formatter\DebugFormatter
  * @covers \HttpMessageLogger\Formatter\Record
  */
-final class FormatterTest extends TestCase
+final class DebugFormatterTest extends TestCase
 {
     public function testRequestFormatting(): void
     {
-        $formatter = new DefaultFormatter('prefix');
+        $formatter = new DebugFormatter('prefix');
         $request = new Request('POST', '/some/uri', ['X-Test'=>'123'], 'test body');
         $record = $formatter->formatRequest($request);
 
@@ -28,7 +28,7 @@ final class FormatterTest extends TestCase
 
     public function testResponseFormatting(): void
     {
-        $formatter = new DefaultFormatter('prefix');
+        $formatter = new DebugFormatter('prefix');
         $request = new Request('POST', '/some/uri', ['X-Test'=>'123'], 'test body');
         $response = new Response(200, ['X-Test'=>'321'], 'test response');
         $record = $formatter->formatResponse($response, $request);
@@ -40,7 +40,7 @@ final class FormatterTest extends TestCase
 
     public function testResponseFormattingWithoutRequest(): void
     {
-        $formatter = new DefaultFormatter('prefix');
+        $formatter = new DebugFormatter('prefix');
         $response = new Response(200, ['X-Test'=>'321'], 'test response');
         $record = $formatter->formatResponse($response, null);
 
